@@ -9,3 +9,4 @@ This is my first RMarkdown file tracked by Git!!
 Commit, then push, not that hard. het was opdr1e
 
 changed for 1.3a
+Making more changes to see in git status
