@@ -1,7 +1,9 @@
 ---
-title: "Opdr1c"
+title: "Opdracht_1c"
 output: html_document
 ---
 
 
 This is my first RMarkdown file tracked by Git!!
+
+Commit, then push, not that hard. 
