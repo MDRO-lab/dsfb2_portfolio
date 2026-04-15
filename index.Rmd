@@ -1,6 +1,6 @@
 ---
-title: "index"
-output: html_document
+title: "A Book"
+author: "Frida Gomam"
 site: bookdown::bookdown_site
 documentclass: book
 output:
@@ -8,4 +8,8 @@ output:
   #bookdown::pdf_book: default
 ---
 
-Header 
+# Hello World
+
+Hi.
+
+Bye.
