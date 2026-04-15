@@ -1,0 +1,4 @@
+book_filename: "Portfolio"
+rmd_files:
+- index.Rmd
+- CV.Rmd
