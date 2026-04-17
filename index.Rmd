@@ -1,15 +1,15 @@
 ---
-title: "A Minimal Book Example"
-author: "Yihui Xie"
-date: "`r Sys.Date()`"
+title: "DSFB2 Portfolio"
+author: "Mathijs van Drongelen"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
 documentclass: book
-bibliography: [book.bib, packages.bib]
-biblio-style: apalike
-link-citations: yes
-github-repo: rstudio/bookdown-demo
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+output:
+  bookdown::gitbook: default
+  #bookdown::pdf_book: default
 ---
 
-Content
+# Index 
+
+Hi.
+
+Bye.
