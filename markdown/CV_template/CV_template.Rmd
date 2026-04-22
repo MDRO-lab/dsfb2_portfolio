@@ -73,4 +73,7 @@ tribble(
 *	Gamen
 *	Dungeons & Dragons
 
+Credits to: 
+Mitchell O'Hara-Wild, creator of CV template and package.
+Carmine Spagnuolo, creator of theme for the CV.
 
