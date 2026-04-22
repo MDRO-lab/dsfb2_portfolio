@@ -1,0 +1,179 @@
+---
+title: "rna-seq_opdracht2"
+author: "Mathijs van Drongelen(1832719), Diana Tereshchenko(1865053)"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, setup}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE) 
+```
+
+```{r libraries, eval = TRUE, message=FALSE}
+library(tidyverse)
+library(Rsubread)
+library(DESeq2)
+library(pheatmap)
+```
+
+# Onderdeel Les 2 
+
+## Onderdeel 2a
+
+- *Schrijf code voor het genereren van de count table met de Rsubread package.*
+
+- *NB: voer dit script niet uit, want de count table is al voor jullie gegenereerd!*
+
+```{R, opdr2a}
+#input .bam file location
+bam_dir <- "/home/daur2/rnaseq/rnaseq_ipsc/bam/"
+
+#output counts location
+counts_dir <- "/home/daur2/rnaseq/rnaseq_ipsc/counts/"
+
+# Create vector with names of bam files for files argument of Featurecounts
+bam_files <- list.files(bam_dir, pattern = ".*\\.bam$", full.names = TRUE)
+
+# Count the reads per gene using the in-built NCBI RefSeq annotations
+read_counts <- featureCounts(
+  
+  files = bam_files,
+  annot.inbuilt = "hg38",  #we use human genome 
+  useMetaFeatures = TRUE,
+  strandSpecific = 0,
+  isPairedEnd = TRUE,  #data is Paired (forward en reverse fragment)
+  countReadPairs = TRUE, #tel data als paar aka een DNA fragment ipv. forward en reverse individueel 
+  nthreads = 10
+)
+
+```
+
+## Onderdeel 2b 
+
+- *Gebruik de ‘stat’ data frame uit de count table om een staafdiagram te maken met daarin het percentage assigned reads voor elk sample.*
+
+
+```{R, opdr2b, eval = TRUE}
+Counting_table_raw<-readRDS("/home/daur2/rnaseq/rnaseq_ipsc/counts/read_counts.rds")
+counting_table<-Counting_table_raw$stat
+rownames(counting_table) <- counting_table$Status
+counting_table$Status = NULL
+
+counting_table_t<-counting_table %>% t() %>% 
+  as_tibble()
+
+ counting_table_t<-counting_table_t %>% 
+   mutate(Names=colnames(counting_table)) %>%
+  mutate(Total=colSums(counting_table)) %>% 
+  mutate(Assign_prct=Assigned/Total*100)
+ 
+counting_table_t %>% ggplot(aes(x = Names, y = Assign_prct))+
+  geom_col()+
+  labs(title = "Percentage of assigned reads from total reads in RNA-seq samples",
+       x = "RNA-seq samples",
+       y = "Assigned read (%)")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+- *Wat is je conclusie op basis van deze grafiek?*
+
+Conclusie: Het percentage assigned reads van de totale reads is 40-60%. Is hoger
+in de eerste 4 samples vergeleken met de laatste 4. De iPSCs lijken gemiddeld minder assigned
+reads te hebben dan de fibroblast lijnen. 
+
+## Onderdeel 2c 
+
+- *Gebruik de count table en het csv bestand met sample informatie om een DESeq2 object te maken.*
+
+```{R, opdr2c, eval = TRUE}
+# Obtain the count matrix
+count_matrix <- Counting_table_raw$counts
+metadata <- read_csv("/home/daur2/rnaseq/rnaseq_ipsc/ipsc_sampledata.csv")
+
+# Convert the metadata to data frame object
+metadata <- as.data.frame(metadata)
+
+# Add rownames to the metadata data frame
+rownames(metadata) <- paste0(metadata$Run, ".bam")
+
+# Check if column names of count table are the same as row names of metadata object
+colnames(count_matrix) == rownames(metadata)
+
+#Factor Cell types as the difference in celltype / treatment to iPSC's is the point
+# of interest
+
+metadata$Cell_type<-metadata$Cell_type %>% str_replace("Skin derived fibroblast", "Skin_derived_fibroblast")
+
+metadata$Cell_type <- metadata$Cell_type %>% 
+factor(levels = c("Skin_derived_fibroblast", "iPSC"))
+
+
+# Create the DESeqDataSet object
+dds <- DESeqDataSetFromMatrix(
+  countData = count_matrix,
+  colData = metadata, 
+  design = ~ Cell_type
+)
+
+```
+
+## Onderdeel 2d 
+- *Voer een PCA analyse uit en maak een plot van PC1 versus PC2.* 
+
+```{R, opdr2d, eval = TRUE}
+# log2 normalization 
+dds_normalized <- rlog(dds)
+
+# Perform PCA 
+pca <- dds_normalized %>% assay() %>% t() %>% prcomp()
+
+# Find the proportion of variance explained by each PC
+pca_summary <- summary(pca)$importance
+pca_summary
+
+# Create data frame with metadata and the PCA values for plotting
+pca_plotting <- cbind(metadata, pca$x) %>% mutate(source_name = str_remove_all(source_name, "Fibroblast |iPSC ")) %>%
+  mutate(Cell_type = str_replace_all(Cell_type, "Skin_derived_fibroblast", "Skin derived fibroblasts")) 
+colnames(pca_plotting)
+pca_plotting
+# Obtain the percentages of variation covered by PC1 and PC2
+PC1_var <- round(pca_summary["Proportion of Variance", "PC1"]*100, digits = 1)
+PC2_var <- round(pca_summary["Proportion of Variance", "PC2"]*100, digits = 1)
+# Plot PC1 vs PC2
+ggplot(pca_plotting) + 
+  geom_point(aes(x=PC1, y=PC2, color = Cell_type, shape = source_name ), size = 5) +
+  ggtitle("PCA voor iPS") +
+  xlab(paste0("PC1 (", PC1_var, "%)")) +
+  ylab(paste0("PC2 (", PC2_var, "%)")) +
+  labs(color = "Cell type",
+       shape = "Source name"
+  ) +
+  theme_bw()
+
+```
+
+- *Wat is je conclusie op basis van deze plot?*
+PC1 verklaart 82,2% van de variatie in de gegevens, wat het grootste deel van de totale variatie omvat. PC1 scheidt de celtypen duidelijk van elkaar, met fibroblasten aan de linkerkant en iPSC’s aan de rechterkant. Dit geeft aan dat het celtype de belangrijkste oorzaak van variatie is.
+
+Fibroblasten vertonen grotere scheiding langs PC2, wat wijst op grotere variabiliteit binnen de groep in vergelijking met iPSC. Maar dit vertegenwoordigt een veel kleiner deel van de totale variantie.
+
+## Onderdeel 2e
+
+- *Maak een heatmap waarin de correlatiecoëfficiënten voor de verschillende samples zijn weergegeven.*
+
+```{R, opdr2e, eval = TRUE}
+# Extract the matrix from the normalized DESeq object
+dds_normalized_matrix <- assay(dds_normalized)    
+
+# Compute pairwise correlation values
+fib_ipsc_cor <- cor(dds_normalized_matrix)    
+fib_ipsc_cor
+
+# Plot heatmap using the correlation; annotate the heatmap based on the cell type
+pheatmap(fib_ipsc_cor, annotation = metadata["Cell_type"])
+```
+
+- *Wat is je conclusie op basis van deze heatmap?* 
+Ook in de heatmap worden monsters gegroepeerd op basis van het celtype. De heatmap bevestigt dus de resultaten van de PCA. 
+
+

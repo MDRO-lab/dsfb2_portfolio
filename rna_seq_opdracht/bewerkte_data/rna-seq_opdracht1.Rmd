@@ -1,0 +1,139 @@
+---
+title: "RNA-seq_opdracht1"
+authors: "Mathijs van Drongelen(1832719), Diana Tereshchenko(1865053)"
+date: "2026-03-23"
+output: html_document
+---
+```{r, setup}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE) 
+library(tidyverse)
+library(Rsubread)
+```
+# Onderdeel Les 1 
+## Onderdeel 1a
+- *Schrijf een korte introductie voor de Rmarkdown met daarin in eigen woorden het doel van jouw onderzoek/analyses.*
+
+Deze formatieve opdracht is gebaseerd op onderzoek naar fibroblasten afkomstig van de menselijke huid en daaruit geïnduceerde pluripotente stamcellen(iPSC). Van de twee proefpersonen zijn er twee cellijnen verkregen. De vier transcriptiefactoren, namelijk MYC, OCT3/4, SOX2 en KLF4, worden tot overexpressie gebracht om iPSC te maken. 
+
+Voor elke conditie zijn twee RNA-seq-datasets met paired reads gegenereerd. Voor het genereren van deze RNA-seq-datasets is het standed protocol gebruikt, waarmee plus- en min-strengen kunnen worden geïdentificeerd. 
+
+In de eerste deel van de formatieve opdracht worden volgende analyses uitgevoerd:
+
+- Kwaliteitscontrole op basis van FastQC-rapporten (1c)
+
+- De alignment van de RNA-seq-datasets met gebruik van hg38 genome index (1d)
+
+- Visuele inspectie van de aligment statistiek (1e)
+
+## Opdracht 1b:
+- *Stel dat de sample identifiers in een textfile staan. Schrijf een bash script voor het downloaden van de fastq files voor alle identifiers. Zorg ervoor dat dit script een for loop bevat, zodat je niet voor elke fastq file een aparte regel code hoeft te schrijven.*
+
+```{bash, opdr1b}
+for id in $(cat "$text.txt")
+do 
+    fastq-dump --split-3 --outdir "$outdirsra" --gzip "$id"
+done
+```
+
+## Onderdeel 1c
+- *Bekijk de FastQC html rapporten voor de verschillende fastq files. Wat zijn je conclusies?*
+### SRR7866687_1_fastqc.html 
+
+- per base sequence quality: >30  = Goed 
+- per sequence quality scores: piek aan de rechterkant van de grafiek, hoge gemiddelde Phred-score = Goed 
+
+### SRR7866687_2_fastqc.html  
+
+- per base sequence quality: >30 = Goed
+- per sequence quality scores: piek aan de rechterkant van de grafiek, hoge gemiddelde Phred-score = Goed 
+
+Conclusie: Geschikt voor downstream-analyse
+
+SRR7866688_1_fastqc.html
+SRR7866688_2_fastqc.html
+SRR7866689_1_fastqc.html
+SRR7866689_2_fastqc.html
+SRR7866690_1_fastqc.html
+SRR7866690_2_fastqc.html
+SRR7866691_1_fastqc.html
+SRR7866691_2_fastqc.html
+SRR7866692_1_fastqc.html
+SRR7866692_2_fastqc.html
+SRR7866693_1_fastqc.html
+SRR7866693_2_fastqc.html
+SRR7866694_1_fastqc.html
+SRR7866694_2_fastqc.html
+
+
+## Onderdeel 1d
+- *Schrijf code voor het uitvoeren van de alignment met de Rsubread package. Voor de alignment kun je gebruik maken van de hg38 genome index die is te vinden /home/daur2/rnaseq/hg38_index/*
+
+- *NB: voer dit script niet uit, want de alignment is al voor jullie uitgevoerd!*
+
+```{R, opdr1d}
+# Create object with location of fastq files
+fastq_dir <- "/home/daur2/rnaseq/rnaseq_ipsc/fastq/."
+
+# Create object with basename of index files
+hg38_index <- "./hg38_index/hg38_index"
+
+# Create object with output dir for bam files
+bam_dir <- "~/daur2/bam/."
+
+# Create a vector with sample numbers
+samples <- list.files(fastq_dir, pattern = "_[12].fastq.gz") %>% 
+  str_remove(pattern = "_[12].fastq.gz") %>%
+  unique()
+
+# Align the reads in the fastq files
+alignment_statistics <- align(
+  
+  index = hg38_index,
+  readfile1 = paste0(fastq_dir, samples, "_1.fastq.gz"), 
+  readfile2 = paste0(fastq_dir, samples, "_2.fastq.gz"),
+  type = "rna", input_format = "gzFASTQ", output_format = "BAM",
+  output_file = paste0(bam_dir, samples, ".bam"), 
+      
+  # report only uniquely mapping reads
+  unique = TRUE,
+      
+  # number of CPU threads
+  nthreads = 10
+      
+)
+
+# Store the alignment statistics as R object
+saveRDS(alignment_statistics, file = paste0(bam_dir, "alignment_statistics.rds"))
+```
+
+## Onderdeel 1e
+- *In de directory met de bam files kun je ook het bestand ‘alignment_statistics.rds’ vinden. Gebruik dit bestand om een grouped bar graph te maken met daarin voor elk sample zowel het percentage mapped fragments als het percentage unmapped fragments.*
+
+```{R, opdr1e, eval = TRUE}
+#Step 1 RDS to tibble 
+Alignment<-readRDS(file = "alignment_statistics.rds") %>% t() %>% as_tibble()
+alignment_statistics<-readRDS("alignment_statistics.rds")
+
+#Step 2 add columns
+Alignment<-Alignment %>%
+  mutate(Naam = colnames(alignment_statistics), .before = Total_fragments,
+         mapped_perct = Mapped_fragments/Total_fragments*100, 
+unmapped_perct = Unmapped_fragments/Total_fragments*100)
+
+#Step 3 make data tidy for barplot 
+Alignment<-Alignment %>% pivot_longer(cols = c("mapped_perct", "unmapped_perct"), 
+                           names_to = "mapping", values_to = "percentage")
+
+#Step 4 plot the data
+Alignment %>% ggplot(aes(x = percentage, y = Naam, fill = mapping))+
+  geom_col(position = position_dodge())+
+  labs(title = "Percentage of mapped and unmapped areas in the RNA sequences",
+       x = "Percentage (%)", y = "Name of SRR Identifier")
+
+```
+
+- *Wat is je conclusie op basis van deze grafiek?*
+
+Ongeveer 95% van de RNA sequenties zijn mapped en 5% is unmapped. Er zijn veel 
+unieke reads die plekken matchen met de reference genome 
+en weinig die nergens goed kunnen matchen.

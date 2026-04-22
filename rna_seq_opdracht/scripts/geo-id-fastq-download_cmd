@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+echo "Path to the file:"
+read sraidfile #reads the file path variable 
+
+echo "Output directory:"
+read outdirsra #reads the output file variable 
+
+fi 
+
+for id in $(cat "$sraidfile")
+do 
+    fastq-dump --split-3 --outdir "$outdirsra" --gzip "$id"
+done

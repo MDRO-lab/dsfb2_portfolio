@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+echo "Path to the file:"
+read sraidfile #reads the file path variable 
+
+echo "Output directory:"
+read outdirsra #reads the output file variable 
+if [ -d "$outdirsra" ]; then 
+	echo "Directory exists"
+else 
+	echo "Directory does not exist, creating it..."
+	mkdir -p "$outdirsra"	
+fi 
+while read -r id
+do
+    [[ -z "$id" ]] && continue
+    fastq-dump --split-3 --outdir "$outdirsra" --gzip "$id"
+done < "$sraidfile" #reads the code line by line, skips the empty lines, tells bash to use $sraidfile as inputSSS

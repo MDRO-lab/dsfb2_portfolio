@@ -1,0 +1,200 @@
+---
+title: "rna-seq_opdracht2"
+author: "Mathijs van Drongelen(1832719), Diana Tereshchenko(1865053)"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, setup}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE) 
+```
+
+```{r libraries, eval = TRUE, message=FALSE}
+library("AnnotationDbi")
+library("org.Hs.eg.db")
+library("pheatmap")
+library("GOstats")
+library("tidyverse")
+```
+# Onderdeel Les 4
+
+## Onderdeel 4a
+- *Maak een heatmap zoals bij onderdeel 3c. Echter, zorg ervoor dat de rijen nu gelabeld worden met het gensymbool i.p.v. de Entrez identifier.*
+```{R, opdr4a, eval = TRUE}
+
+# Replace the column names with conditions
+colnames(count_values) <- colData(dds)$Cell_type
+
+rownames(count_values) <- mapIds(org.Hs.eg.db,
+                             keys = rownames(count_values),
+                             column = "SYMBOL",
+                             keytype = "ENTREZID",
+                             multiVals = "first")
+
+# Visualize the results in a heatmap
+pheatmap(count_values, show_rownames = TRUE)
+```
+
+## Onderdeel 4b
+- *Schrijf een functie voor het uitvoeren van de GO term enrichment analyse. Deze functie heeft 4 input argumenten:*
+
+1. *DESeq2 results object (results(DESeq(dds)))*
+2. *Logische waarde (TRUE of FALSE) die aangeeft of de enrichment analyse gedaan moet worden voor de upgereguleerde genen of voor de downgereguleerde genen.*
+3. *Drempelwaarde voor |LFC|.*
+4. *Drempelwaarde voor adjusted p-waarde.*
+- *De output van de functie is de summary van de GO term analyse  (summary(hyperGTest(test_object)))*
+
+- *Bijvoorbeeld: gotermAnalysis(ipsc_dge_results, upregulated = FALSE, 1, 0.01) geeft de summary van de enrichment analyse voor de downgereguleerde genen met een LFC < -1 en een adjusted p-waarde < 0.01 voor de genen in het DESeq2 results object ipsc_dge_results.*
+
+```{R, opdr4b, eval = TRUE}
+
+#stap 1 functie argumenten voor DEseq2 results object, regulatie, lfc- en p-waarde threshold
+
+GO_enrichment_analysis<-function(DEseq_results,upregulation,lfc_threshold,pval_threshold){
+  
+  all_genes1 <- DEseq_results %>% data.frame() %>% rownames()
+  
+  #stap 2 if-case voor upregulatie
+  
+  if (upregulation == TRUE){
+    
+    upregulated_genes1 <- DEseq_results %>% data.frame() %>% 
+  filter(log2FoldChange > lfc_threshold, padj < pval_threshold) %>% rownames()
+  
+  
+  #stap2.5 voeg output toe voor upregulatie
+  
+  test_object_upreg <- new("GOHyperGParams",
+                   geneIds = upregulated_genes1,
+                   universeGeneIds = all_genes1, 
+                   annotation = "org.Hs.eg.db", 
+                   ontology = "BP", 
+                   pvalueCutoff = 1,
+                   testDirection = "over")
+  
+  #summary object upreg
+  
+goterm_analysis_upreg <- (summary(hyperGTest(test_object_upreg)))
+
+return(goterm_analysis_upreg)
+}
+   #stap 3 if-case voor down regulatie
+  
+  else if  (upregulation == FALSE){
+    
+     downregulated_genes1 <- DEseq_results %>% data.frame() %>% 
+  filter(log2FoldChange < -lfc_threshold, padj < pval_threshold) %>% rownames()
+    
+     #stap 3.5 voeg output toe voor downregulatie
+     
+    test_object_downreg <- new("GOHyperGParams",
+                   geneIds = downregulated_genes1,
+                   universeGeneIds = all_genes1, 
+                   annotation = "org.Hs.eg.db", 
+                   ontology = "BP", 
+                   pvalueCutoff = 1,
+                   testDirection = "over")
+     
+#summary object downreg
+     
+goterm_analysis_downreg <- (summary(hyperGTest(test_object_downreg)))
+return(goterm_analysis_downreg)
+  }
+}
+  
+GO_enrichment_analysis(ipsc_dge_results,upregulation = FALSE,1,0.01)
+
+```
+
+## Onderdeel 4c
+
+- *Voer een GO term enrichment analyse uit voor de upgereguleerde genen (gedefinieerd als adjusted p-value < 0.01 en LFC > 1) en voor de downgereguleerde genen (gedefinieerd als adjusted p-value < 0.01 en LFC < -1). Maak voor beide analyses een grafiek.*
+
+```{R, opdr4c, eval = TRUE}
+
+ipsc_dge_results_go <- results(ipsc_dge, alpha = 0.01, lfcThreshold = 1)
+
+# Create a list of upregulated genes
+upregulated_genes <- ipsc_dge_results_go %>% data.frame() %>% 
+  filter(log2FoldChange > 1, padj < 0.01) %>% rownames()
+
+# Create a list of downregulated genes
+downregulated_genes <- ipsc_dge_results_go %>% data.frame() %>% 
+  filter(log2FoldChange < -1, padj < 0.01) %>% rownames()
+
+# Create a list of all genes in the dataset
+all_genes <- ipsc_dge_results_go %>% data.frame() %>% rownames()
+
+# Perform GO term enrichment analysis for upregulated genes 
+test_object_upreg <- new("GOHyperGParams",
+                   geneIds = upregulated_genes,
+                   universeGeneIds = all_genes, 
+                   annotation = "org.Hs.eg.db", 
+                   ontology = "BP", 
+                   pvalueCutoff = 1,
+                   testDirection = "over")
+goterm_analysis_upreg <- hyperGTest(test_object_upreg)
+
+goterm_analysis_upreg
+
+goterm_analysis_upreg_results <- summary(goterm_analysis_upreg)
+
+goterm_analysis_upreg_results
+
+# Perform GO term enrichment analysis for downregulated genes
+test_object_downreg <- new("GOHyperGParams",
+                   geneIds = downregulated_genes,
+                   universeGeneIds = all_genes, 
+                   annotation = "org.Hs.eg.db", 
+                   ontology = "BP", 
+                   pvalueCutoff = 1,
+                   testDirection = "over")
+
+goterm_analysis_downreg <- hyperGTest(test_object_downreg)
+
+goterm_analysis_downreg
+
+goterm_analysis_downreg_results <- summary(goterm_analysis_downreg)
+
+goterm_analysis_downreg_results
+
+#Adjust p values for multiple testing 
+goterm_analysis_upreg_results$padj <- p.adjust(goterm_analysis_upreg_results$Pvalue, method = "BH")
+
+goterm_analysis_downreg_results$padj <- p.adjust(goterm_analysis_downreg_results$Pvalue, method = "BH")
+
+# Select only gene sets that are larger than 5 but smaller 
+# than 500 (to prevent taking along very small and very large
+# gene sets).
+goterm_analysis_upreg_results <- goterm_analysis_upreg_results %>% filter(Count > 5) %>% filter(Count < 500)
+
+goterm_analysis_downreg_results <- goterm_analysis_downreg_results %>% filter(Count > 5) %>% filter(Count < 500)
+
+#Select the top 20 GO terms 
+goterm_analysis_upreg_top20  <- goterm_analysis_upreg_results[order(goterm_analysis_upreg_results$padj)[1:20],]
+goterm_analysis_downreg_top20 <- goterm_analysis_downreg_results[order(goterm_analysis_downreg_results$padj)[1:20],]
+
+#Plot the p-values of the top 20 GO terms (upregulated)
+p1 <- goterm_analysis_upreg_top20 %>% ggplot(aes(x = Term, y =-log10(padj))) +
+  geom_point() +
+  coord_flip() + 
+  ylab(expression(-log[10](adjuisted ~italic(P)~value))) +
+  xlab("GO terms") + 
+  ggtitle("Top 20 enriched GO terms\n for upregulated genes")
+
+p1
+
+#Plot the p-values of the top 20 GO terms (downregulated)
+p2 <- goterm_analysis_downreg_top20 %>% ggplot(aes(x = Term, y =-log10(padj))) +
+  geom_point() +
+  coord_flip() + 
+  ylab(expression(-log[10](adjuisted ~italic(P)~value))) +
+  xlab("GO terms") + 
+  ggtitle("Top 20 enriched GO terms\n for downregulated genes")
+
+p2
+ 
+
+```
+- *Wat zijn je conclusies? Welke processen worden er downgereguleerd tijdens de vorming van stamcellen uit fibroblasten? En welke processen worden juist upgereguleerd?*
+

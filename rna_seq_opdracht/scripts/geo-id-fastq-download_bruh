@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+for id in $(cat "$text.txt")
+do 
+    fastq-dump --split-3 --outdir "$outdirsra" --gzip "$id"
+done
