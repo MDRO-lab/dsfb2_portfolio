@@ -15,4 +15,4 @@ while read -r id
 do
     [[ -z "$id" ]] && continue
     fastq-dump --split-3 --outdir "$outdirsra" --gzip "$id"
-done < "$sraidfile" #reads the code line by line, skips the empty lines, tells bash to use $sraidfile as inputSSS
+done < "$sraidfile" #reads the code line by line, skips the empty lines, tells bash to use $sraidfile as inputs
