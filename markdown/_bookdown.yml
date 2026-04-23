@@ -1,0 +1,10 @@
+book_filename: "Portfolio"
+rmd_files:
+- index.Rmd
+- 01_cv.Rmd
+- 02_toekomst_plan.Rmd
+- 03_vrije_opdracht.Rmd
+- 04_rna_seq.Rmd
+- 05_repository.Rmd
+- 06_reproducibility.Rmd
+- 07_reproduction2.Rmd

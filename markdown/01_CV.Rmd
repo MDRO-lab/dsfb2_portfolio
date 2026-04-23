@@ -1,0 +1,10 @@
+# CV
+
+```{r name, message=FALSE,include=FALSE}
+library(pdftools)
+
+pdf_convert("CV_template/CV_template.pdf", format = "png", pages = 1, dpi = 300)
+```
+
+![](CV_template_1.png){width=100%}
+

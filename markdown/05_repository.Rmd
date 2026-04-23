@@ -1,0 +1,7 @@
+# Guerilla analytics op portfolio repository 
+
+Portfolio repository folder structure screenshots met dir_tree en README.md screenshot.
+
+![](repo_dir_tree1.png){width=100%}
+![](repo_dir_tree2.png){width=100%}
+![](repo_README.png){width=100%}

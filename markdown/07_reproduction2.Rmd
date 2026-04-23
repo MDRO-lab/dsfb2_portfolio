@@ -1,0 +1,33 @@
+# 4b Artikel beoordeling 
+
+In dit onderdeel wordt een artikel beoordel op reproduceerbaarheid.
+
+* Het gekozen artikel is:
+
+Jing S, Wang H (2025) Infectivity and fatality of influenza in pre- and post-COVID-19 pandemic year. PLOS Computational Biology 21(7): e1013229. https://doi.org/10.1371/journal.pcbi.1013229
+
+* De onderzoeksvraag van dit onderzoek is:
+"Wat zijn de verschillen in besmettingsdata van influenza voor en na de COVID-19 epidemie"
+
+## Samenvatting methode en resultaten
+Er zijn twee modellen voor Influenza verspreiding gemaakt waarin ze leeftijd en genetische varianten meerekenen. Ze hebben de leeftijdsgroepen verder onderverdeeld tot: gevoelig, besmet, genezen, overleden en besmet zonder het risico om anderen te besmetten. 
+
+In hun resultaten zien ze dat veel mensen overleden tijdens de COVID-19 epidemie aan influenza en dat na de COVID-19 epidemie de influenza besmetting en sterfte aantallen weer naar pre-COVID-19 aantallen gingen. Net na de COVID-19 pandemie in 2022-2023 was er minder besmetting van influenza, vermoedelijk door aanpassingen in gedrag m.b.t. lockdown, dragen van maskers en andere aanpassingen in gedrag. 
+
+## Criteria 
+Study purpose - Yes 
+Data Availability Statement - yes
+Data Location - data kan hier gevonden worden: (https://github.com/shuanglinjing/Long-COVID-impact-on-influenza-infectivity-and-fatality/tree/master.)
+
+Study Location - Yes, U.S.
+Author Review - tier3/tier4 orchid.org link was er, maar mail was universitaire mail
+Ethics Statement - no 
+Funding Statement - Yes
+Code Availability - Yes 
+
+## Code beoordeling
+Geen R code te bekennen .m (vermodelijk MATLAB script gevonden, andere studie kiezen?)
+
+Slechte README zonder context op repository, alleen link naar artikel. 
+.m code mist comments en duidelijk over stappen. 
+Reproductie is niet mogelijk zonder .R code.

@@ -1,0 +1,22 @@
+# Plan voor de toekomst
+
+In deze cursus leren we een vaardigheid in onze vrije ruimte, om te kiezen of hij relevant is voor mijn toekomst moet ik mezelf vragen: Wat wil ik in mijn toekomst? 
+
+
+Hierover de volgende vragen:
+
+* Waar zou je graag willen werken over 1 of 2 jaar? Hoe zie jouw droombaan er uit?
+
+Ik heb nog weinig gedacht over een droombaan of waar ik mezelf over een paar jaar zie. Ik hoop op een plek te komen waarbij ik de skills die ik geleerd heb qua data analyse en management van de Data Science cursus kan benuttigen. Hierbij zou ik graag nog steeds nat labwerk willen doen. Of dit nou met cellen, eiwit of DNA is maakt mij niet uit. 
+
+
+* Hoe sta je er nu voor om daadwerkelijk aan die droombaan te kunnen beginnen? Welke skills heb je al?
+
+Ik sta er best netjes voor. Ik heb ervaring met alle standaard labtechnieken, lab automation ervaring van mijn BMR specialisatie en stage. Hieraan heb ik Data Science vaardigheden toegevoegd met betrekking tot R, Bash, Github en data management. 
+
+
+* Welke skills zou je nog moeten/willen leren?
+
+Ik zou graag willen verbeteren met bash scripting en het leren van Python. Ik zou ook verschillende analyses in Rstudio willen uitvoeren. Wat voorbeelden hiervan zijn: proteomics, massa spectrofotometrie en FACS. Hierbuiten wil ik beter worden in het automatiseren van de analyses met scripting en Rmarkdown. 
+
+
