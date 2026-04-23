@@ -12,5 +12,6 @@ Data Science for Biology 2 Portfolio
  * XX_... Rmd = .Rmd pages in the book 
  * CV_template/ = contains 20secondscv template to create CV_template_1.pdf
   * CV_template.Rmd = .Rmd CV template
- * CV_template_1.png = CV_template_1.pdf converted to .png for use in 01_CV.Rmd
+ * .png files = screenshots and CV template .png for showing them in the book
+*rna_seq_guerilla/ = rna seq project organisation according to guerilla analytics
  

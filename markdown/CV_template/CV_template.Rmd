@@ -2,7 +2,7 @@
 name: "Mathijs"
 surname: "van Drongelen"
 position: "Student"
-address: "Houten, ..."
+address: "Houten"
 phone: +1 22 3333 4444
 pronouns: he/him
 profilepic: ""
@@ -21,7 +21,7 @@ library(vitae)
 
 # Profiel
 
-Life sciences student op Hogeschool Utrecht met een specialisatie in Biomoleculair Onderzoek (BMR) met een afgeronde Minor Food & Pharma. Door studie en projecten ervaring opgedaan met onderzoeken en laboratorium technieken zoals: qPCR, SDS-PAGE, Pure Prep FR. Praktisch ingesteld met een analytische aanpak voor labonderzoeken.
+Life sciences student op Hogeschool Utrecht met een specialisatie in Biomoleculair Onderzoek (BMR) met een afgeronde Minor Food & Pharma. Door studie en projecten ervaring opgedaan met onderzoeken en laboratorium technieken zoals: qPCR, SDS-PAGE, Pure Prep FR. Een minor Data Science gedaan om mijn skillset te verbreden op het gebied van Data analyse en management. Bij de minor heb ik geleerd om te programmeren met R en Bash. Ik ben een Praktisch ingestelde student met een analytische aanpak voor labonderzoek.
 
 # Opleiding
 

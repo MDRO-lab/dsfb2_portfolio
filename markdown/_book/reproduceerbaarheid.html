@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Reproduceerbaarheid | DSFB2 Portfolio</title>
+  <meta name="description" content="7 Reproduceerbaarheid | DSFB2 Portfolio" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Reproduceerbaarheid | DSFB2 Portfolio" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Reproduceerbaarheid | DSFB2 Portfolio" />
+  
+  
+  
+
+<meta name="author" content="Mathijs van Drongelen" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="guerilla-analytics-op-portfolio-repository.html"/>
+<link rel="next" href="b-artikel-beoordeling.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="cv.html"><a href="cv.html"><i class="fa fa-check"></i><b>2</b> CV</a></li>
+<li class="chapter" data-level="3" data-path="plan-voor-de-toekomst.html"><a href="plan-voor-de-toekomst.html"><i class="fa fa-check"></i><b>3</b> Plan voor de toekomst</a></li>
+<li class="chapter" data-level="4" data-path="vrije-opdracht-proteomics.html"><a href="vrije-opdracht-proteomics.html"><i class="fa fa-check"></i><b>4</b> Vrije opdracht proteomics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="vrije-opdracht-proteomics.html"><a href="vrije-opdracht-proteomics.html#omschrijving"><i class="fa fa-check"></i><b>4.1</b> Omschrijving</a></li>
+<li class="chapter" data-level="4.2" data-path="vrije-opdracht-proteomics.html"><a href="vrije-opdracht-proteomics.html#planning"><i class="fa fa-check"></i><b>4.2</b> Planning</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="guerilla-analytics-op-rna-seq-formatieve-opdracht.html"><a href="guerilla-analytics-op-rna-seq-formatieve-opdracht.html"><i class="fa fa-check"></i><b>5</b> Guerilla analytics op rna-seq formatieve opdracht</a></li>
+<li class="chapter" data-level="6" data-path="guerilla-analytics-op-portfolio-repository.html"><a href="guerilla-analytics-op-portfolio-repository.html"><i class="fa fa-check"></i><b>6</b> Guerilla analytics op portfolio repository</a></li>
+<li class="chapter" data-level="7" data-path="reproduceerbaarheid.html"><a href="reproduceerbaarheid.html"><i class="fa fa-check"></i><b>7</b> Reproduceerbaarheid</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="reproduceerbaarheid.html"><a href="reproduceerbaarheid.html#vervolgonderzoek"><i class="fa fa-check"></i><b>7.1</b> vervolgonderzoek</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="b-artikel-beoordeling.html"><a href="b-artikel-beoordeling.html"><i class="fa fa-check"></i><b>8</b> 4b Artikel beoordeling</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="b-artikel-beoordeling.html"><a href="b-artikel-beoordeling.html#samenvatting-methode-en-resultaten"><i class="fa fa-check"></i><b>8.1</b> Samenvatting methode en resultaten</a></li>
+<li class="chapter" data-level="8.2" data-path="b-artikel-beoordeling.html"><a href="b-artikel-beoordeling.html#criteria"><i class="fa fa-check"></i><b>8.2</b> Criteria</a></li>
+<li class="chapter" data-level="8.3" data-path="b-artikel-beoordeling.html"><a href="b-artikel-beoordeling.html#code-beoordeling"><i class="fa fa-check"></i><b>8.3</b> Code beoordeling</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DSFB2 Portfolio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="reproduceerbaarheid" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Reproduceerbaarheid<a href="reproduceerbaarheid.html#reproduceerbaarheid" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="reproduceerbaarheid.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="reproduceerbaarheid.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="reproduceerbaarheid.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(drc)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="reproduceerbaarheid.html#cb2-1" tabindex="-1"></a>liq_data<span class="ot">&lt;-</span><span class="fu">read_excel</span>(<span class="st">&quot;../raw_data/CE.LIQ.FLOW.062_Tidydata(1).xlsx&quot;</span>,<span class="at">sheet =</span> <span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="reproduceerbaarheid.html#cb2-2" tabindex="-1"></a>liq_data<span class="sc">$</span>RawData <span class="sc">%&gt;%</span> <span class="fu">str</span>() </span></code></pre></div>
+<pre><code>##  num [1:360] 44 37 45 47 41 35 41 36 40 38 ...</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="reproduceerbaarheid.html#cb4-1" tabindex="-1"></a>liq_data<span class="sc">$</span>compName <span class="sc">%&gt;%</span> <span class="fu">str</span>()</span></code></pre></div>
+<pre><code>##  chr [1:360] &quot;2,6-diisopropylnaphthalene&quot; &quot;2,6-diisopropylnaphthalene&quot; &quot;2,6-diisopropylnaphthalene&quot; ...</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="reproduceerbaarheid.html#cb6-1" tabindex="-1"></a>liq_data<span class="sc">$</span>compConcentration <span class="sc">%&gt;%</span> <span class="fu">str</span>() </span></code></pre></div>
+<pre><code>##  chr [1:360] &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; ...</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="reproduceerbaarheid.html#cb8-1" tabindex="-1"></a>liq_data<span class="sc">$</span>expType <span class="sc">%&gt;%</span> <span class="fu">str</span>()</span></code></pre></div>
+<pre><code>##  chr [1:360] &quot;experiment&quot; &quot;experiment&quot; &quot;experiment&quot; &quot;experiment&quot; &quot;experiment&quot; &quot;experiment&quot; &quot;experiment&quot; &quot;experiment&quot; ...</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="reproduceerbaarheid.html#cb10-1" tabindex="-1"></a><span class="co">#compConcentration is class character, moet worden</span></span>
+<span id="cb10-2"><a href="reproduceerbaarheid.html#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="reproduceerbaarheid.html#cb10-3" tabindex="-1"></a><span class="fu">unique</span>(liq_data<span class="sc">$</span>compConcentration)</span></code></pre></div>
+<pre><code>##  [1] &quot;4.99&quot;                  &quot;0.499&quot;                 &quot;4.99E-2&quot;               &quot;4.9899999999999996E-3&quot;
+##  [5] &quot;4.9899999999999999E-4&quot; &quot;4.99E-5&quot;               &quot;19.5&quot;                  &quot;1.95&quot;                 
+##  [9] &quot;0.19500000000000001&quot;   &quot;1.95E-2&quot;               &quot;1.9499999999999999E-3&quot; &quot;1.95E-4&quot;              
+## [13] &quot;0,000195&quot;              &quot;1.5&quot;                   &quot;0&quot;                     &quot;0.5&quot;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="reproduceerbaarheid.html#cb12-1" tabindex="-1"></a><span class="co"># Comma in een value</span></span>
+<span id="cb12-2"><a href="reproduceerbaarheid.html#cb12-2" tabindex="-1"></a>liq_data<span class="sc">$</span>compConcentration<span class="ot">&lt;-</span><span class="fu">str_replace_all</span>(liq_data<span class="sc">$</span>compConcentration,</span>
+<span id="cb12-3"><a href="reproduceerbaarheid.html#cb12-3" tabindex="-1"></a>                                            <span class="at">pattern =</span> <span class="st">&quot;,&quot;</span>,</span>
+<span id="cb12-4"><a href="reproduceerbaarheid.html#cb12-4" tabindex="-1"></a>                                            <span class="at">replacement =</span> <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb12-5"><a href="reproduceerbaarheid.html#cb12-5" tabindex="-1"></a>liq_data<span class="sc">$</span>compConcentration<span class="ot">&lt;-</span>liq_data<span class="sc">$</span>compConcentration <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb12-6"><a href="reproduceerbaarheid.html#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="reproduceerbaarheid.html#cb12-7" tabindex="-1"></a>liq_data<span class="sc">$</span>compConcentration <span class="sc">%&gt;%</span> <span class="fu">str</span>() </span></code></pre></div>
+<pre><code>##  num [1:360] 4.99 4.99 4.99 4.99 4.99 4.99 4.99 4.99 4.99 4.99 ...</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="reproduceerbaarheid.html#cb14-1" tabindex="-1"></a><span class="co">#compConcentration is no numerical en te bewerken</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="reproduceerbaarheid.html#cb15-1" tabindex="-1"></a>liq_data <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(compConcentration), <span class="at">y =</span> RawData, <span class="at">colour =</span> compName, <span class="at">shape =</span> expType))<span class="sc">+</span></span>
+<span id="cb15-2"><a href="reproduceerbaarheid.html#cb15-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb15-3"><a href="reproduceerbaarheid.html#cb15-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="fl">0.2</span>)<span class="sc">+</span></span>
+<span id="cb15-4"><a href="reproduceerbaarheid.html#cb15-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Analyse van het effect van compounds en hun concentraties op het aantal nakomeling van C. elegans&quot;</span>,</span>
+<span id="cb15-5"><a href="reproduceerbaarheid.html#cb15-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Compound concentratie&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Aantal nakomelingen C. elegans&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 5 rows containing missing values or values outside the scale range (`geom_point()`).
+## Removed 5 rows containing missing values or values outside the scale range (`geom_point()`).</code></pre>
+<p><img src="Portfolio_files/figure-html/plotting-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="reproduceerbaarheid.html#cb17-1" tabindex="-1"></a>normalised<span class="ot">&lt;-</span> liq_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(expType <span class="sc">==</span> <span class="st">&quot;controlNegative&quot;</span>)</span>
+<span id="cb17-2"><a href="reproduceerbaarheid.html#cb17-2" tabindex="-1"></a>liq_data <span class="ot">&lt;-</span> liq_data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="st">&quot;normdata&quot;</span> <span class="ot">=</span> RawData <span class="sc">/</span> <span class="fu">mean</span>(normalised<span class="sc">$</span>RawData))</span>
+<span id="cb17-3"><a href="reproduceerbaarheid.html#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="reproduceerbaarheid.html#cb17-4" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="reproduceerbaarheid.html#cb17-5" tabindex="-1"></a>liq_data <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(compConcentration), <span class="at">y =</span> normdata, <span class="at">colour =</span> compName, <span class="at">shape =</span> expType))<span class="sc">+</span></span>
+<span id="cb17-6"><a href="reproduceerbaarheid.html#cb17-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb17-7"><a href="reproduceerbaarheid.html#cb17-7" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="fl">0.2</span>)<span class="sc">+</span></span>
+<span id="cb17-8"><a href="reproduceerbaarheid.html#cb17-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Analyse van het effect van compounds en hun concentraties op het aantal nakomeling van C. elegans&quot;</span>,</span>
+<span id="cb17-9"><a href="reproduceerbaarheid.html#cb17-9" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;log10 Compound concentratie&quot;</span>, <span class="at">y =</span> <span class="st">&quot;relatief Aantal nakomelingen C. elegans&quot;</span>)<span class="sc">+</span></span>
+<span id="cb17-10"><a href="reproduceerbaarheid.html#cb17-10" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">linetype =</span> <span class="st">&quot;dotted&quot;</span>,<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 5 rows containing missing values or values outside the scale range (`geom_point()`).
+## Removed 5 rows containing missing values or values outside the scale range (`geom_point()`).</code></pre>
+<p><img src="Portfolio_files/figure-html/normalisatie-1.png" alt="" width="672" /></p>
+<p>In dit experiment worden verschillende compounds getest op C. elegans. Er wordt gemeten hoeveel nakomelingen de C. elegans heeft na blootstelling aan deze compounds. Hierbij is de negatieve controle S-medium en de positieve controle van het aantal nakomelingen is Ethanol.</p>
+<p>De negatieve controle laat zien wat er gebeurt als de C. elegans bloot worden gesteld aan een stof die geen effect heeft op het aantal nakomelingen. De positieve controle is een stof waarvan bekend is dat het het aantal nakomelingen van C. elegans laat dalen. De vehicle control is de controle van ethanol wat overal in zit om de compounds op te lossen.</p>
+<p>De normalisatie is gedaan met de negatieve controle, omdat deze je ‘0’ waarde is. Deze stof heeft geen effect op C. elegans en alles wat minder nakomelingen levert is waarschijnlijk giftig voor C. elegans, dus een negatieve waarde (&lt;1). Alles erboven zorgt juist voor meer nakomelingen en kan mogelijk positieve effect hebben op de voortplanting van C. elegans, dus een positieve waarde (&gt;1).</p>
+<div id="vervolgonderzoek" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> vervolgonderzoek<a href="reproduceerbaarheid.html#vervolgonderzoek" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Een vervolgstap voor dit onderzoek zou zijn om een dose-reponse curve te gebruiken. Een package in R die dit doet is ‘drc’. Deze package bevat verschillende modellen en functies om dose-response curves te maken. Het algemene model is de “drc::drm” functie. Deze kan gebruikt worden voor een concentratie-reponse curve, zoals we hierboven hebben met C. elegans reponse op de concentratie van compounds.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="guerilla-analytics-op-portfolio-repository.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="b-artikel-beoordeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

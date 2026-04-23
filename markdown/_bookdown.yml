@@ -5,5 +5,6 @@ rmd_files:
 - 02_toekomst_plan.Rmd
 - 03_vrije_opdracht.Rmd
 - 04_rna_seq.Rmd
-- 05_portfolio.Rmd
-
+- 05_repository.Rmd
+- 06_reproducibility.Rmd
+- 07_reproduction2.Rmd

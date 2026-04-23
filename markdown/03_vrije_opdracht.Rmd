@@ -1,2 +1,16 @@
-# Vrije opdracht proteomics met MALDIquant 
- (https://cran.r-project.org/web/packages/MALDIquant/index.html)
+# Vrije opdracht proteomics
+
+## Omschrijving
+
+ 
+proteomics is groot veld met veel analyses die ik nooit heb gedaan, hierom wil ik de analyses en theorie graag leren als vrije opdracht voor dsfb2. De eerste package die ik ga leren om proteomics analyses uit te voeren is MALDIquant. 
+(https://cran.r-project.org/web/packages/MALDIquant/index.html)
+
+Als er meer of betere packages blijken te zijn zal ik deze ook hanteren in een pipeline.
+
+## Planning
+- 4 uur, ontdekken van MALDIquant
+- 8 tutorials en theorie bij behorende technieken leren en hanteren
+- 8 pipelines maken en optimaliseren 
+- 4 uur zoeken naar passende datasets
+- 8 uur pipeline uit testen op een nieuwe dataset en verbeteren

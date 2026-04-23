@@ -1,9 +1,7 @@
 # Guerilla analytics op rna-seq formatieve opdracht
 
+Opdracht3a, screenshot met dir_tree van de rna_seq_guerilla folder en de README.md van de folder.
 
-![rna_seq]("markdown/rna_seq_guerilla.png"){width=100%}
-![rna_seq]("markdown/README_rna_seq_guerilla.png"){width=100%}
+![](rna_seq_guerilla.png){width=100%}
+![](README_rna_seq_guerilla.png){width=100%}
 
-```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("markdown/rna_seq_guerilla.png")
-```
