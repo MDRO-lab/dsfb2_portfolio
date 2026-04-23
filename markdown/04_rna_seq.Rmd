@@ -1,2 +1,9 @@
 # Guerilla analytics op rna-seq formatieve opdracht
 
+
+![rna_seq]("markdown/rna_seq_guerilla.png"){width=100%}
+![rna_seq]("markdown/README_rna_seq_guerilla.png"){width=100%}
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("markdown/rna_seq_guerilla.png")
+```
