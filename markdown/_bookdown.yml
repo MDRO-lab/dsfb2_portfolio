@@ -1,4 +1,9 @@
 book_filename: "Portfolio"
 rmd_files:
 - index.Rmd
-- CV.Rmd
+- 01_cv.Rmd
+- 02_toekomst_plan.Rmd
+- 03_vrije_opdracht.Rmd
+- 04_rna_seq.Rmd
+- 05_portfolio.Rmd
+

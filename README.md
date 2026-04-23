@@ -5,7 +5,7 @@ Data Science for Biology 2 Portfolio
 * README.md = Main documentation file
 * .gitignore = Git ignore rules
 * .dsfb2_workflows_portfolio.Rproj = Rstudio project file
-* markdown/ = Folder with all the .Rmd files and other files for building the book
+* markdown/ = Folder with all the .Rmd pages for the book and supporting files
  * _book/ = output of render_book, used for building the Github page
  * _bookdown.yml = rules for generating the _book
  * 00_index.Rmd = first page of book, required to build Github page

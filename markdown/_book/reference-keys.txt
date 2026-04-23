@@ -1,2 +1,6 @@
 index
 cv
+plan-voor-de-toekomst
+vrije-opdracht-proteomics-met-maldiquant
+guerilla-analytics-op-rna-seq-formatieve-opdracht
+guerilla-analytics-op-portfolio-repository
