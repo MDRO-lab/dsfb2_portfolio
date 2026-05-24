@@ -1,0 +1,51 @@
+# Parametrized COVID-19 data
+
+Voor deze opdracht heb ik een geparametrizeerde grafiek gemaakt van COVID-19 data van de European Centre for Disease Prevention and Control (ECDC). 
+
+```{r setup, message=FALSE}
+library(tidyverse)
+```
+
+```{r data acquisition, fig.width=13}
+covid_data<-read.csv("https://opendata.ecdc.europa.eu/covid19/nationalcasedeath_eueea_daily_ei/csv/", na.strings = "", fileEncoding = "UTF-8-BOM")
+
+covid_data$year<-as.factor(covid_data$year)
+
+# Filtering gedaan i.v.m. negatieve case/deaths aantallen, aangenomen dat dit een typo was en '-' symbool verwijderd
+
+covid_data$cases<-abs(covid_data$cases)
+covid_data$deaths<-abs(covid_data$deaths)
+
+covid_filtered<-covid_data %>% filter(countriesAndTerritories == params$land & year == params$jaar & month == params$maand)
+```
+
+```{r plotting}
+case_plot<-covid_filtered %>% ggplot(aes(x = day,y = cases))+
+  geom_col()+
+  labs(title = paste0("Number of COVID-19 cases in ",params$land," in the month of ",params$jaar,"-",params$maand," per day"),
+       x = "Days of the month",
+       y = "Number of cases per day",subtitle = paste0("Data was taken from European Centre for Disease Prevention and Control (ECDC). 
+Total number of cases in ",params$land," during this month: ",sum(covid_filtered$cases)))+
+  theme_bw()
+
+deaths_plot<-covid_filtered %>% ggplot(aes(x = day,y = deaths))+
+  geom_col()+
+  labs(title = paste0("Number of COVID-19 deaths in ",params$land," in the month of ",params$jaar,"-",params$maand," per day"), x = "Days of the month",
+       y = "Number of deaths per day",subtitle = paste0("Data was taken from European Centre for Disease Prevention and Control (ECDC)
+Total number of deaths in ",params$land," during this month: ",sum(covid_filtered$deaths)))+
+  theme_bw()
+```
+
+De code voor het importeren, filteren en plotten van de COVID-19 data zit hierboven. De parameters zijn land, jaar en maand. Dit script werkt niet indien er een list van landen/maanden of jaren wordt toegevoegd. Dus "Netherlands","Belgium"zou niet werken.  
+
+
+```{r, echo=FALSE}
+case_plot
+deaths_plot
+```
+
+Indien specifiek het totale aantal cases/deaths per maand nodig was staat de som voor het aantal cases en deaths staat erbij in de subtext. 
+
+[Video van het gebruik van deze .Rmd](https://youtu.be/H5c-RHKx-XM)
+
+De video is een Youtube link, omdat github het niet altijd even leuk vindt om grote files op te nemen.

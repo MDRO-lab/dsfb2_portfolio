@@ -123,6 +123,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 </head>
 
@@ -142,7 +165,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="vrije-opdracht-proteomics.html"><a href="vrije-opdracht-proteomics.html"><i class="fa fa-check"></i><b>4</b> Vrije opdracht proteomics</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="vrije-opdracht-proteomics.html"><a href="vrije-opdracht-proteomics.html#omschrijving"><i class="fa fa-check"></i><b>4.1</b> Omschrijving</a></li>
-<li class="chapter" data-level="4.2" data-path="vrije-opdracht-proteomics.html"><a href="vrije-opdracht-proteomics.html#planning"><i class="fa fa-check"></i><b>4.2</b> Planning</a></li>
+<li class="chapter" data-level="4.2" data-path="vrije-opdracht-proteomics.html"><a href="vrije-opdracht-proteomics.html#planning"><i class="fa fa-check"></i><b>4.2</b> Planning</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="vrije-opdracht-proteomics.html"><a href="vrije-opdracht-proteomics.html#bronnen"><i class="fa fa-check"></i><b>4.2.1</b> Bronnen</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="guerilla-analytics-op-rna-seq-formatieve-opdracht.html"><a href="guerilla-analytics-op-rna-seq-formatieve-opdracht.html"><i class="fa fa-check"></i><b>5</b> Guerilla analytics op rna-seq formatieve opdracht</a></li>
 <li class="chapter" data-level="6" data-path="guerilla-analytics-op-portfolio-repository.html"><a href="guerilla-analytics-op-portfolio-repository.html"><i class="fa fa-check"></i><b>6</b> Guerilla analytics op portfolio repository</a></li>
@@ -156,6 +182,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="b-artikel-beoordeling.html"><a href="b-artikel-beoordeling.html#criteria"><i class="fa fa-check"></i><b>8.2</b> Criteria</a></li>
 <li class="chapter" data-level="8.3" data-path="b-artikel-beoordeling.html"><a href="b-artikel-beoordeling.html#code-beoordeling"><i class="fa fa-check"></i><b>8.3</b> Code beoordeling</a></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="project-leptospira-introductie.html"><a href="project-leptospira-introductie.html"><i class="fa fa-check"></i><b>9</b> Project Leptospira introductie</a></li>
+<li class="chapter" data-level="10" data-path="parametrized-covid-19-data.html"><a href="parametrized-covid-19-data.html"><i class="fa fa-check"></i><b>10</b> Parametrized COVID-19 data</a></li>
 </ul>
 
       </nav>
@@ -184,13 +212,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="planning" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Planning<a href="vrije-opdracht-proteomics.html#planning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>4 uur, ontdekken van MALDIquant</li>
+<li>4 uur, ontdekken van MALDIquant en literatuuronderzoek MALDI en massaspectrofotometrie</li>
 <li>8 tutorials en theorie bij behorende technieken leren en hanteren</li>
 <li>8 pipelines maken en optimaliseren</li>
 <li>4 uur zoeken naar passende datasets</li>
 <li>8 uur pipeline uit testen op een nieuwe dataset en verbeteren</li>
 </ul>
+<div id="bronnen" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Bronnen<a href="vrije-opdracht-proteomics.html#bronnen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://cran.r-project.org/web/packages/MALDIquant/vignettes/MALDIquant-intro.pdf" class="uri">https://cran.r-project.org/web/packages/MALDIquant/vignettes/MALDIquant-intro.pdf</a>
+<a href="https://cran.r-project.org/web/packages/MALDIquant/MALDIquant.pdf" class="uri">https://cran.r-project.org/web/packages/MALDIquant/MALDIquant.pdf</a>
+<a href="https://strimmerlab.github.io/software/maldiquant/" class="uri">https://strimmerlab.github.io/software/maldiquant/</a>
+<a href="https://github.com/sgibb/MALDIquantExamples/" class="uri">https://github.com/sgibb/MALDIquantExamples/</a>
+<a href="https://cran.r-project.org/web/packages/MALDIquant/index.html" class="uri">https://cran.r-project.org/web/packages/MALDIquant/index.html</a></p>
+<p>demo(“MALDIquant”)</p>
+<p>~4 uur gewerkt aan MALDIquant taaie package</p>
 
+</div>
 </div>
 </div>
             </section>

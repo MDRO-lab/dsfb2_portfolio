@@ -1,0 +1,40 @@
+---
+title: "MALDIquant_testing1"
+author: "Mathijs van Drongelen"
+date: "2026-05-18"
+output: html_document
+---
+
+```{r libraries}
+library(MALDIquant)
+library(MALDIquant)
+library(tidyverse)
+```
+
+```{r practice1}
+s <- createMassSpectrum(mass=1:10, intensity=1:10,metaData=list(name="Spectrum1"))
+s
+mass(s)
+intensity(s)
+metaData(s)
+
+test1<-MALDIquant::createMassSpectrum(mass=c(4,8,2,8,11,1.6,3.5,5.7),intensity=c(9,1,24,7,34,4,6,5),metaData = list(name="spectrum2"))
+plot(test1)
+
+# importing data from 'Mass spectra Converted to zXML'
+ # Importing is done with MALDIquantForeign package not MALDIquant itself
+data_101mzML<-MALDIquantForeign::importMzMl("Mass Spectra converted to zXML/Mass Spectra converted to zXML/240116_samples 101 tot en met 110 240116-1238-1011014561/101.mzML")
+plot(data_101mzML[[1]])
+ 
+# https://cran.r-project.org/web/packages/MALDIquant/MALDIquant.pdf
+# testing data for MALDIquant is data(fiedler2009subset), data from a 2009 study
+
+```
+
+![MALDIquant vignette workflow spectrofotometrie](C:/Users/Mathijs/Pictures/Screenshots/MALDIquant_workflow.png)
+```{r}
+# steps of spectrometric analysis, including but not limited to importing, QC and smoothing
+ # one chunk per step with text inbetween 
+
+```
+

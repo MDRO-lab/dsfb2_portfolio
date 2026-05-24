@@ -8,9 +8,23 @@ proteomics is groot veld met veel analyses die ik nooit heb gedaan, hierom wil i
 
 Als er meer of betere packages blijken te zijn zal ik deze ook hanteren in een pipeline.
 
+
+
 ## Planning
-- 4 uur, ontdekken van MALDIquant
+- 4 uur, ontdekken van MALDIquant en literatuuronderzoek MALDI en massaspectrofotometrie
 - 8 tutorials en theorie bij behorende technieken leren en hanteren
 - 8 pipelines maken en optimaliseren 
 - 4 uur zoeken naar passende datasets
 - 8 uur pipeline uit testen op een nieuwe dataset en verbeteren
+
+### Bronnen
+
+https://cran.r-project.org/web/packages/MALDIquant/vignettes/MALDIquant-intro.pdf
+https://cran.r-project.org/web/packages/MALDIquant/MALDIquant.pdf
+https://strimmerlab.github.io/software/maldiquant/
+https://github.com/sgibb/MALDIquantExamples/
+https://cran.r-project.org/web/packages/MALDIquant/index.html
+
+demo("MALDIquant")
+
+~4 uur gewerkt aan MALDIquant taaie package

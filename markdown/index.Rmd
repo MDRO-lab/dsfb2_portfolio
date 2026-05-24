@@ -1,11 +1,16 @@
 ---
 title: "DSFB2 Portfolio"
 author: "Mathijs van Drongelen"
+bibliography: "Projecticum.bib"
 site: bookdown::bookdown_site
 documentclass: book
 output:
   bookdown::gitbook: default
   #bookdown::pdf_book: default
+params:
+  land: "France"
+  jaar: "2020"
+  maand: "12"
 ---
 
 # Index 
