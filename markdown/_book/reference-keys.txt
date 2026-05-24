@@ -4,6 +4,7 @@ plan-voor-de-toekomst
 vrije-opdracht-proteomics
 omschrijving
 planning
+bronnen
 guerilla-analytics-op-rna-seq-formatieve-opdracht
 guerilla-analytics-op-portfolio-repository
 reproduceerbaarheid
@@ -12,3 +13,4 @@ b-artikel-beoordeling
 samenvatting-methode-en-resultaten
 criteria
 code-beoordeling
+project-leptospira-introductie
