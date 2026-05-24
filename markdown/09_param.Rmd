@@ -9,14 +9,14 @@ params:
 
 ```{r setup, message=FALSE}
 library(tidyverse)
-library(stringr)
-library(gridExtra)
 ```
 
 ```{r data acquisition, fig.width=13}
 covid_data<-read.csv("https://opendata.ecdc.europa.eu/covid19/nationalcasedeath_eueea_daily_ei/csv/", na.strings = "", fileEncoding = "UTF-8-BOM")
 
 covid_data$year<-as.factor(covid_data$year)
+
+# Filtering gedaan i.v.m. negatieve case/deaths aantallen, aangenomen dat dit een typo was en '-' symbool verwijderd
 
 covid_data$cases<-abs(covid_data$cases)
 covid_data$deaths<-abs(covid_data$deaths)
@@ -39,7 +39,14 @@ Total number of deaths in ",params$land," during this month: ",sum(covid_filtere
   theme_bw()
 ```
 
-```{r, echo=TRUE}
+De code voor het importeren, filteren en plotten van de COVID-19 data zit hierboven. De parameters zijn land, jaar en maand. Dit script werkt niet indien er een list van landen/maanden of jaren wordt toegevoegd. Dus "Netherlands","Belgium"zou niet werken.  
+
+
+```{r, echo=FALSE}
 case_plot
 deaths_plot
 ```
+
+Indien specifiek het totale aantal cases/deaths per maand nodig was staat de som voor het aantal cases en deaths staat erbij in de subtext. 
+
+[Video van het gebruik van deze .Rmd](https://youtu.be/H5c-RHKx-XM)
