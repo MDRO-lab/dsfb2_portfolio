@@ -14,3 +14,4 @@ samenvatting-methode-en-resultaten
 criteria
 code-beoordeling
 project-leptospira-introductie
+parametrized-covid-19-data

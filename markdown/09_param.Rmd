@@ -1,11 +1,6 @@
----
-title: "Parametrized COVID-19 data"
-output: html_document
-params:
-  land: "France"
-  jaar: "2020"
-  maand: "12"
----
+# Parametrized COVID-19 data
+
+Voor deze opdracht heb ik een geparametrizeerde grafiek gemaakt van COVID-19 data van de European Centre for Disease Prevention and Control (ECDC). 
 
 ```{r setup, message=FALSE}
 library(tidyverse)
@@ -22,7 +17,9 @@ covid_data$cases<-abs(covid_data$cases)
 covid_data$deaths<-abs(covid_data$deaths)
 
 covid_filtered<-covid_data %>% filter(countriesAndTerritories == params$land & year == params$jaar & month == params$maand)
+```
 
+```{r plotting}
 case_plot<-covid_filtered %>% ggplot(aes(x = day,y = cases))+
   geom_col()+
   labs(title = paste0("Number of COVID-19 cases in ",params$land," in the month of ",params$jaar,"-",params$maand," per day"),
@@ -50,3 +47,5 @@ deaths_plot
 Indien specifiek het totale aantal cases/deaths per maand nodig was staat de som voor het aantal cases en deaths staat erbij in de subtext. 
 
 [Video van het gebruik van deze .Rmd](https://youtu.be/H5c-RHKx-XM)
+
+De video is een Youtube link, omdat github het niet altijd even leuk vindt om grote files op te nemen.
