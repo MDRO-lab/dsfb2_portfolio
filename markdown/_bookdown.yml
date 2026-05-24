@@ -9,3 +9,4 @@ rmd_files:
 - 06_reproducibility.Rmd
 - 07_reproduction2.Rmd
 - 08_bronvermelding.Rmd
+- 09_param.Rmd
