@@ -27,7 +27,7 @@ liq_data$compConcentration %>% str()
 #compConcentration is no numerical en te bewerken
 ```
 
-```{r plotting}
+```{r plotting1}
 liq_data %>% ggplot(aes(x = log10(compConcentration), y = RawData, colour = compName, shape = expType))+
   geom_point()+
   geom_jitter(height = 0.2)+

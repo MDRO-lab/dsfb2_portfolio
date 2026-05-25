@@ -25,6 +25,165 @@ https://strimmerlab.github.io/software/maldiquant/
 https://github.com/sgibb/MALDIquantExamples/
 https://cran.r-project.org/web/packages/MALDIquant/index.html
 
-demo("MALDIquant")
 
-~4 uur gewerkt aan MALDIquant taaie package
+## De analyse
+
+
+```{r library}
+library(MALDIquant)
+library(MALDIquantForeign)
+library(tidyverse)
+
+```
+Maldiquant bevat bijna alle functionaliteit voor MALDI-TOF en massa spectrometrie, maar voor het importeren van andere data types zoals .mzML moet MALDIquantForeign worden gebruikt.
+
+```{r practice1}
+s <- createMassSpectrum(mass=1:10, intensity=1:10,metaData=list(name="Spectrum1"))
+s
+mass(s)
+intensity(s)
+metaData(s)
+
+test1<-MALDIquant::createMassSpectrum(mass=c(4,8,2,8,11,1.6,3.5,5.7),intensity=c(9,1,24,7,34,4,6,5),metaData = list(name="spectrum2"))
+plot(test1)
+
+# importing data from 'Mass spectra Converted to zXML'
+ # Importing is done with MALDIquantForeign package not MALDIquant itself
+
+data_101mzML<-MALDIquantForeign::importMzMl("Mass Spectra converted to zXML/Mass Spectra converted to zXML/240116_samples 101 tot en met 110 240116-1238-1011014561/101.mzML")
+plot(data_101mzML[[1]])
+ 
+# https://cran.r-project.org/web/packages/MALDIquant/MALDIquant.pdf
+# testing data for MALDIquant is data(fiedler2009subset), data from a 2009 study
+
+```
+In dit voorbeeld wordt 1 .mzML file geimporteerd, er kunnen ook meerdere orden geimporteerd, list.files() is een optie om meerdere files in een folder te importen als er massa spectra vergeleken moeten worden. bijv. referentie samples en monsters met een ziekte. 
+
+
+
+
+![MALDIquant vignette workflow spectrofotometrie](C:/Users/Mathijs/Pictures/Screenshots/MALDIquant_workflow.png)
+```{r Quality control}
+# steps of spectrometric analysis, including but not limited to importing, QC and smoothing
+ # one chunk per step with text inbetween 
+
+#install_github("sgibb/MALDIquantExamples")
+
+
+# Zijn er intensity waardes bij de Massa Spectrofotometrie
+any(sapply(data_101mzML,MALDIquant::isEmpty))
+
+# Is het aantal datapunten gelijk aan b.v. controle
+table(sapply(data_101mzML, length))
+
+# Ruwe data plotting
+
+plot(data_101mzML[[1]])
+
+```
+Bij het plotten zien we de massa spectrum, we zien een 'baseline', dat is de achtergrond waar geen pieken zijn. De baseline wordt later verwijderd, omdat dit een onjuist beeld geeft over de intensiteit van de pieken t.o.v. achtergrond anders.
+
+
+```{r variance stabilization}
+# ruwe mzML
+
+plot(data_101mzML[[1]])
+
+# getransformeerde data
+
+plot(transformIntensity(object = data_101mzML[[1]],method="sqrt"))
+
+plot(transformIntensity(object = data_101mzML[[1]],method="log2"))
+
+data_101mzML<-transformIntensity(object = data_101mzML[[1]],method="sqrt")
+```
+Variance stabilization is de stap waar de Massa spectra wordt getransformeerd met door de wortel of log van de datapunten. De 'sqrt' optie werkt, maar alle 'log' opties creeëren data die niet werkbaar lijkt. Deze stap maakt de data makkelijker te visualiseren, omdat extreme pieken dichterbij de andere pieken worden gebracht. 
+
+```{r smoothing}
+
+# vergelijking van smoothing methodes, MovingAverage lijkt te aggresief te smoothen, SavitzkyGolay wordt gebruikt
+  # halfWwindowSize=15leidt tot wat smoothing zonder te veel data verandering
+plot(smoothIntensity(data_101mzML, method="SavitzkyGolay",halfWindowSize=15))
+plot(smoothIntensity(data_101mzML, method="MovingAverage",halfWindowSize=15))
+plot(data_101mzML)
+sm_data_101mzML<-smoothIntensity(data_101mzML, method="SavitzkyGolay",halfWindowSize=15)
+
+```
+Smoothing is bedoeld om ruis te verwijderen en maakt hiermee het identificeren van pieken makkelijker. voor de 'SmoothIntensity' functie zijn er 2 methodes, 'SavitzkyGolay' en 'MovingAverage'. 'SavitzkyGolay' leek minder aggresief te smoothen, de intensiteit werd minder aangetast met dezelfde halfWindowSize. Te hoge smoothing heeft effect op de piekvormen en hoogtes. Dit kan later effect hebben op de 'peakdetection' en andere downstream analyse.
+
+```{r baseline correction}
+
+# testing van verschillende baseline algoritmes
+
+snip<-(estimateBaseline(sm_data_101mzML,method = "SNIP"))
+tophat<-(estimateBaseline(sm_data_101mzML,method = "TopHat"))
+convexhull<-(estimateBaseline(sm_data_101mzML,method = "ConvexHull"))
+median<-(estimateBaseline(sm_data_101mzML,method = "median"))
+
+plot(sm_data_101mzML)
+lines(snip,col = "red", lwd = 1)
+
+plot(sm_data_101mzML)
+lines(tophat,col = "red", lwd = 1)
+
+plot(sm_data_101mzML)
+lines(convexhull,col = "red", lwd = 1)
+
+plot(sm_data_101mzML)
+lines(median,col = "red", lwd = 1)
+
+# TopHat verwijdert de meeste ruis en lijkt niet te veel invloed te hebben op de pieken zelf
+
+bs_cor_data_101mzML<-removeBaseline(sm_data_101mzML,method = "TopHat")
+plot(bs_cor_data_101mzML)
+```
+De baseline is de achtergrond/ruis, we willen de achergrond weg hebben om alleen pieken over te houden. Om de baseline uit te rekenen zijn er verschillende methodes, 'TopHat' is het gekomen algoritme, omdat deze wat aggresiever ruis verwijderde wat in dit geval leidde tot minder ruis.
+
+
+
+```{r normalization}
+plot(calibrateIntensity(bs_cor_data_101mzML,method = "TIC"))
+norm_data_101mzML<-calibrateIntensity(bs_cor_data_101mzML,method = "TIC")
+```
+De pieken worden standaard i.v.m. batch control genormaliseerd, hoewel dat hier eigenlijk niet nodig is. 
+
+
+```{r warping}
+# defaults, geen vol begrip van instellingen hiervan
+warp_data_101mzML<-alignSpectra(spectra = list(norm_data_101mzML))
+plot(warp_data_101mzML[[1]])
+```
+Deze stap is bedoeld om samples te vergelijking tussen massa spectra. In dit geval wordt niet vergeleken en is dit ook niet nodig.
+
+
+```{r peak detection}
+
+noise<-estimateNoise(warp_data_101mzML[[1]])
+plot(warp_data_101mzML[[1]],xlim=c(6000,10000),ylim=c(0,0.003))
+lines(noise, col = "red")
+
+peaks1 <- detectPeaks(warp_data_101mzML, method="MAD",halfWindowSize=20, SNR=3)
+plot(warp_data_101mzML[[1]], xlim=c(5000, 6000), ylim=c(0, 0.003))
+points(peaks[[1]], col="red", pch=4)
+
+peaks2 <- detectPeaks(warp_data_101mzML, method="MAD",halfWindowSize=20, SNR=3)
+plot(warp_data_101mzML[[1]], xlim=c(8000, 10000), ylim=c(0, 0.003))
+points(peaks[[1]], col="red", pch=4)
+```
+Om de pieken te detecteren wordt 'detectPeaks' gebruikt. de Signal-to-Noise ratio is hier erg belangrijk om pieken te determineren, deze ratio is in dit geval 3. 
+
+
+
+```{r peak binning and Feature matrix}
+bin_data_101mzML<-binPeaks(peaks,tolerance = 0.002)
+plot(peaks[[1]])
+plot(bin_data_101mzML[[1]])
+
+# geen verschil gevonden, mogelijk te weinig identieke waardes of niet zichtbaar in plotting
+
+fin_data_101_mzML<-filterPeaks(bin_data_101mzML,minFrequency = 0.3)
+plot(fin_data_101_mzML[[1]])
+```
+Het eindproduct met peakbinnen en feature matrix worden gebruikt om erge vergelijkbare datapunten samen te voegen en valspositieven te verwijderen. Dit product kan later gebruikt worden voor downstream analyse om de exacte compositie van de sample te achterhalen. 
+
+In combinatie met verdere downstream analyse om eiwit compositie te achterhalen is dit een goede dataverwerkingstool voor MALDI-TOF data. 

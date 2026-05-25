@@ -169,6 +169,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="vrije-opdracht-proteomics.html"><a href="vrije-opdracht-proteomics.html#bronnen"><i class="fa fa-check"></i><b>4.2.1</b> Bronnen</a></li>
 </ul></li>
+<li class="chapter" data-level="4.3" data-path="vrije-opdracht-proteomics.html"><a href="vrije-opdracht-proteomics.html#de-analyse"><i class="fa fa-check"></i><b>4.3</b> De analyse</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="guerilla-analytics-op-rna-seq-formatieve-opdracht.html"><a href="guerilla-analytics-op-rna-seq-formatieve-opdracht.html"><i class="fa fa-check"></i><b>5</b> Guerilla analytics op rna-seq formatieve opdracht</a></li>
 <li class="chapter" data-level="6" data-path="guerilla-analytics-op-portfolio-repository.html"><a href="guerilla-analytics-op-portfolio-repository.html"><i class="fa fa-check"></i><b>6</b> Guerilla analytics op portfolio repository</a></li>
@@ -225,10 +226,154 @@ div.csl-indent {
 <a href="https://strimmerlab.github.io/software/maldiquant/" class="uri">https://strimmerlab.github.io/software/maldiquant/</a>
 <a href="https://github.com/sgibb/MALDIquantExamples/" class="uri">https://github.com/sgibb/MALDIquantExamples/</a>
 <a href="https://cran.r-project.org/web/packages/MALDIquant/index.html" class="uri">https://cran.r-project.org/web/packages/MALDIquant/index.html</a></p>
-<p>demo(“MALDIquant”)</p>
-<p>~4 uur gewerkt aan MALDIquant taaie package</p>
-
 </div>
+</div>
+<div id="de-analyse" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> De analyse<a href="vrije-opdracht-proteomics.html#de-analyse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="vrije-opdracht-proteomics.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(MALDIquant)</span>
+<span id="cb1-2"><a href="vrije-opdracht-proteomics.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(MALDIquantForeign)</span>
+<span id="cb1-3"><a href="vrije-opdracht-proteomics.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>Maldiquant bevat bijna alle functionaliteit voor MALDI-TOF en massa spectrometrie, maar voor het importeren van andere data types zoals .mzML moet MALDIquantForeign worden gebruikt.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="vrije-opdracht-proteomics.html#cb2-1" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">createMassSpectrum</span>(<span class="at">mass=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">intensity=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="at">metaData=</span><span class="fu">list</span>(<span class="at">name=</span><span class="st">&quot;Spectrum1&quot;</span>))</span>
+<span id="cb2-2"><a href="vrije-opdracht-proteomics.html#cb2-2" tabindex="-1"></a>s</span></code></pre></div>
+<pre><code>## S4 class type            : MassSpectrum
+## Number of m/z values     : 10          
+## Range of m/z values      : 1 - 10      
+## Range of intensity values: 1 - 10      
+## Memory usage             : 1.414 KiB   
+## Name                     : Spectrum1</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="vrije-opdracht-proteomics.html#cb4-1" tabindex="-1"></a><span class="fu">mass</span>(s)</span></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="vrije-opdracht-proteomics.html#cb6-1" tabindex="-1"></a><span class="fu">intensity</span>(s)</span></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="vrije-opdracht-proteomics.html#cb8-1" tabindex="-1"></a><span class="fu">metaData</span>(s)</span></code></pre></div>
+<pre><code>## $name
+## [1] &quot;Spectrum1&quot;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="vrije-opdracht-proteomics.html#cb10-1" tabindex="-1"></a>test1<span class="ot">&lt;-</span>MALDIquant<span class="sc">::</span><span class="fu">createMassSpectrum</span>(<span class="at">mass=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">2</span>,<span class="dv">8</span>,<span class="dv">11</span>,<span class="fl">1.6</span>,<span class="fl">3.5</span>,<span class="fl">5.7</span>),<span class="at">intensity=</span><span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">1</span>,<span class="dv">24</span>,<span class="dv">7</span>,<span class="dv">34</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">5</span>),<span class="at">metaData =</span> <span class="fu">list</span>(<span class="at">name=</span><span class="st">&quot;spectrum2&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning in validityMethod(as(object, superClass)): Unsorted mass values found.</code></pre>
+<pre><code>## Warning in .reorder(object): Mass and intensity values are reordered.</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="vrije-opdracht-proteomics.html#cb13-1" tabindex="-1"></a><span class="fu">plot</span>(test1)</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/practice1-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="vrije-opdracht-proteomics.html#cb14-1" tabindex="-1"></a><span class="co"># importing data from &#39;Mass spectra Converted to zXML&#39;</span></span>
+<span id="cb14-2"><a href="vrije-opdracht-proteomics.html#cb14-2" tabindex="-1"></a> <span class="co"># Importing is done with MALDIquantForeign package not MALDIquant itself</span></span>
+<span id="cb14-3"><a href="vrije-opdracht-proteomics.html#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="vrije-opdracht-proteomics.html#cb14-4" tabindex="-1"></a>data_101mzML<span class="ot">&lt;-</span>MALDIquantForeign<span class="sc">::</span><span class="fu">importMzMl</span>(<span class="st">&quot;Mass Spectra converted to zXML/Mass Spectra converted to zXML/240116_samples 101 tot en met 110 240116-1238-1011014561/101.mzML&quot;</span>)</span></code></pre></div>
+<pre><code>## Reading spectrum from &#39;C:\Users\Mathijs\Desktop\Github_Repo\dsfb2_portfolio\markdown\Mass Spectra converted to zXML\Mass Spectra converted to zXML\240116_samples 101 tot en met 110 240116-1238-1011014561\101.mzML&#39; ...</code></pre>
+<pre><code>## Found mzML document (version: 1.1).</code></pre>
+<pre><code>## Found 1 spectrum.</code></pre>
+<pre><code>## Processing spectrum 1/1 (id: file=_x0031_01_x002f_0_A1_x002f_1_x002f_1SLin_x002f_fid) ...</code></pre>
+<pre><code>## Look for &#39;&lt;fileChecksum&gt;&#39; position ...</code></pre>
+<pre><code>## Calculating sha1-sum for &#39;C:\Users\Mathijs\Desktop\Github_Repo\dsfb2_portfolio\markdown\Mass Spectra converted to zXML\Mass Spectra converted to zXML\240116_samples 101 tot en met 110 240116-1238-1011014561\101.mzML&#39;: 24ece00fd038071c0494b3fd250dc8713100cbad</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="vrije-opdracht-proteomics.html#cb21-1" tabindex="-1"></a><span class="fu">plot</span>(data_101mzML[[<span class="dv">1</span>]])</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/practice1-2.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="vrije-opdracht-proteomics.html#cb22-1" tabindex="-1"></a><span class="co"># https://cran.r-project.org/web/packages/MALDIquant/MALDIquant.pdf</span></span>
+<span id="cb22-2"><a href="vrije-opdracht-proteomics.html#cb22-2" tabindex="-1"></a><span class="co"># testing data for MALDIquant is data(fiedler2009subset), data from a 2009 study</span></span></code></pre></div>
+<p>In dit voorbeeld wordt 1 .mzML file geimporteerd, er kunnen ook meerdere orden geimporteerd, list.files() is een optie om meerdere files in een folder te importen als er massa spectra vergeleken moeten worden. bijv. referentie samples en monsters met een ziekte.</p>
+<div class="float">
+<img src="C:/Users/Mathijs/Pictures/Screenshots/MALDIquant_workflow.png" alt="MALDIquant vignette workflow spectrofotometrie" />
+<div class="figcaption">MALDIquant vignette workflow spectrofotometrie</div>
+</div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="vrije-opdracht-proteomics.html#cb23-1" tabindex="-1"></a><span class="co"># steps of spectrometric analysis, including but not limited to importing, QC and smoothing</span></span>
+<span id="cb23-2"><a href="vrije-opdracht-proteomics.html#cb23-2" tabindex="-1"></a> <span class="co"># one chunk per step with text inbetween </span></span>
+<span id="cb23-3"><a href="vrije-opdracht-proteomics.html#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="vrije-opdracht-proteomics.html#cb23-4" tabindex="-1"></a><span class="co">#install_github(&quot;sgibb/MALDIquantExamples&quot;)</span></span>
+<span id="cb23-5"><a href="vrije-opdracht-proteomics.html#cb23-5" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="vrije-opdracht-proteomics.html#cb23-6" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="vrije-opdracht-proteomics.html#cb23-7" tabindex="-1"></a><span class="co"># Zijn er intensity waardes bij de Massa Spectrofotometrie</span></span>
+<span id="cb23-8"><a href="vrije-opdracht-proteomics.html#cb23-8" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">sapply</span>(data_101mzML,MALDIquant<span class="sc">::</span>isEmpty))</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="vrije-opdracht-proteomics.html#cb25-1" tabindex="-1"></a><span class="co"># Is het aantal datapunten gelijk aan b.v. controle</span></span>
+<span id="cb25-2"><a href="vrije-opdracht-proteomics.html#cb25-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">sapply</span>(data_101mzML, length))</span></code></pre></div>
+<pre><code>## 
+## 21331 
+##     1</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="vrije-opdracht-proteomics.html#cb27-1" tabindex="-1"></a><span class="co"># Ruwe data plotting</span></span>
+<span id="cb27-2"><a href="vrije-opdracht-proteomics.html#cb27-2" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="vrije-opdracht-proteomics.html#cb27-3" tabindex="-1"></a><span class="fu">plot</span>(data_101mzML[[<span class="dv">1</span>]])</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/Quality%20control-1.png" alt="" width="672" />
+Bij het plotten zien we de massa spectrum, we zien een ‘baseline’, dat is de achtergrond waar geen pieken zijn. De baseline wordt later verwijderd, omdat dit een onjuist beeld geeft over de intensiteit van de pieken t.o.v. achtergrond anders.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="vrije-opdracht-proteomics.html#cb28-1" tabindex="-1"></a><span class="co"># ruwe mzML</span></span>
+<span id="cb28-2"><a href="vrije-opdracht-proteomics.html#cb28-2" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="vrije-opdracht-proteomics.html#cb28-3" tabindex="-1"></a><span class="fu">plot</span>(data_101mzML[[<span class="dv">1</span>]])</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/variance%20stabilization-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="vrije-opdracht-proteomics.html#cb29-1" tabindex="-1"></a><span class="co"># getransformeerde data</span></span>
+<span id="cb29-2"><a href="vrije-opdracht-proteomics.html#cb29-2" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="vrije-opdracht-proteomics.html#cb29-3" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">transformIntensity</span>(<span class="at">object =</span> data_101mzML[[<span class="dv">1</span>]],<span class="at">method=</span><span class="st">&quot;sqrt&quot;</span>))</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/variance%20stabilization-2.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="vrije-opdracht-proteomics.html#cb30-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">transformIntensity</span>(<span class="at">object =</span> data_101mzML[[<span class="dv">1</span>]],<span class="at">method=</span><span class="st">&quot;log2&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning in .replaceNegativeIntensityValues(object): Negative intensity values are replaced by zeros.</code></pre>
+<p><img src="Portfolio_files/figure-html/variance%20stabilization-3.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="vrije-opdracht-proteomics.html#cb32-1" tabindex="-1"></a>data_101mzML<span class="ot">&lt;-</span><span class="fu">transformIntensity</span>(<span class="at">object =</span> data_101mzML[[<span class="dv">1</span>]],<span class="at">method=</span><span class="st">&quot;sqrt&quot;</span>)</span></code></pre></div>
+<p>Variance stabilization is de stap waar de Massa spectra wordt getransformeerd met door de wortel of log van de datapunten. De ‘sqrt’ optie werkt, maar alle ‘log’ opties creeëren data die niet werkbaar lijkt. Deze stap maakt de data makkelijker te visualiseren, omdat extreme pieken dichterbij de andere pieken worden gebracht.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="vrije-opdracht-proteomics.html#cb33-1" tabindex="-1"></a><span class="co"># vergelijking van smoothing methodes, MovingAverage lijkt te aggresief te smoothen, SavitzkyGolay wordt gebruikt</span></span>
+<span id="cb33-2"><a href="vrije-opdracht-proteomics.html#cb33-2" tabindex="-1"></a>  <span class="co"># halfWwindowSize=15leidt tot wat smoothing zonder te veel data verandering</span></span>
+<span id="cb33-3"><a href="vrije-opdracht-proteomics.html#cb33-3" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">smoothIntensity</span>(data_101mzML, <span class="at">method=</span><span class="st">&quot;SavitzkyGolay&quot;</span>,<span class="at">halfWindowSize=</span><span class="dv">15</span>))</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/smoothing-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="vrije-opdracht-proteomics.html#cb34-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">smoothIntensity</span>(data_101mzML, <span class="at">method=</span><span class="st">&quot;MovingAverage&quot;</span>,<span class="at">halfWindowSize=</span><span class="dv">15</span>))</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/smoothing-2.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="vrije-opdracht-proteomics.html#cb35-1" tabindex="-1"></a><span class="fu">plot</span>(data_101mzML)</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/smoothing-3.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="vrije-opdracht-proteomics.html#cb36-1" tabindex="-1"></a>sm_data_101mzML<span class="ot">&lt;-</span><span class="fu">smoothIntensity</span>(data_101mzML, <span class="at">method=</span><span class="st">&quot;SavitzkyGolay&quot;</span>,<span class="at">halfWindowSize=</span><span class="dv">15</span>)</span></code></pre></div>
+<p>Smoothing is bedoeld om ruis te verwijderen en maakt hiermee het identificeren van pieken makkelijker. voor de ‘SmoothIntensity’ functie zijn er 2 methodes, ‘SavitzkyGolay’ en ‘MovingAverage’. ‘SavitzkyGolay’ leek minder aggresief te smoothen, de intensiteit werd minder aangetast met dezelfde halfWindowSize. Te hoge smoothing heeft effect op de piekvormen en hoogtes. Dit kan later effect hebben op de ‘peakdetection’ en andere downstream analyse.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="vrije-opdracht-proteomics.html#cb37-1" tabindex="-1"></a><span class="co"># testing van verschillende baseline algoritmes</span></span>
+<span id="cb37-2"><a href="vrije-opdracht-proteomics.html#cb37-2" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="vrije-opdracht-proteomics.html#cb37-3" tabindex="-1"></a>snip<span class="ot">&lt;-</span>(<span class="fu">estimateBaseline</span>(sm_data_101mzML,<span class="at">method =</span> <span class="st">&quot;SNIP&quot;</span>))</span>
+<span id="cb37-4"><a href="vrije-opdracht-proteomics.html#cb37-4" tabindex="-1"></a>tophat<span class="ot">&lt;-</span>(<span class="fu">estimateBaseline</span>(sm_data_101mzML,<span class="at">method =</span> <span class="st">&quot;TopHat&quot;</span>))</span>
+<span id="cb37-5"><a href="vrije-opdracht-proteomics.html#cb37-5" tabindex="-1"></a>convexhull<span class="ot">&lt;-</span>(<span class="fu">estimateBaseline</span>(sm_data_101mzML,<span class="at">method =</span> <span class="st">&quot;ConvexHull&quot;</span>))</span>
+<span id="cb37-6"><a href="vrije-opdracht-proteomics.html#cb37-6" tabindex="-1"></a>median<span class="ot">&lt;-</span>(<span class="fu">estimateBaseline</span>(sm_data_101mzML,<span class="at">method =</span> <span class="st">&quot;median&quot;</span>))</span>
+<span id="cb37-7"><a href="vrije-opdracht-proteomics.html#cb37-7" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="vrije-opdracht-proteomics.html#cb37-8" tabindex="-1"></a><span class="fu">plot</span>(sm_data_101mzML)</span>
+<span id="cb37-9"><a href="vrije-opdracht-proteomics.html#cb37-9" tabindex="-1"></a><span class="fu">lines</span>(snip,<span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/baseline%20correction-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="vrije-opdracht-proteomics.html#cb38-1" tabindex="-1"></a><span class="fu">plot</span>(sm_data_101mzML)</span>
+<span id="cb38-2"><a href="vrije-opdracht-proteomics.html#cb38-2" tabindex="-1"></a><span class="fu">lines</span>(tophat,<span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/baseline%20correction-2.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="vrije-opdracht-proteomics.html#cb39-1" tabindex="-1"></a><span class="fu">plot</span>(sm_data_101mzML)</span>
+<span id="cb39-2"><a href="vrije-opdracht-proteomics.html#cb39-2" tabindex="-1"></a><span class="fu">lines</span>(convexhull,<span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/baseline%20correction-3.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="vrije-opdracht-proteomics.html#cb40-1" tabindex="-1"></a><span class="fu">plot</span>(sm_data_101mzML)</span>
+<span id="cb40-2"><a href="vrije-opdracht-proteomics.html#cb40-2" tabindex="-1"></a><span class="fu">lines</span>(median,<span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/baseline%20correction-4.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="vrije-opdracht-proteomics.html#cb41-1" tabindex="-1"></a><span class="co"># TopHat verwijdert de meeste ruis en lijkt niet te veel invloed te hebben op de pieken zelf</span></span>
+<span id="cb41-2"><a href="vrije-opdracht-proteomics.html#cb41-2" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="vrije-opdracht-proteomics.html#cb41-3" tabindex="-1"></a>bs_cor_data_101mzML<span class="ot">&lt;-</span><span class="fu">removeBaseline</span>(sm_data_101mzML,<span class="at">method =</span> <span class="st">&quot;TopHat&quot;</span>)</span>
+<span id="cb41-4"><a href="vrije-opdracht-proteomics.html#cb41-4" tabindex="-1"></a><span class="fu">plot</span>(bs_cor_data_101mzML)</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/baseline%20correction-5.png" alt="" width="672" />
+De baseline is de achtergrond/ruis, we willen de achergrond weg hebben om alleen pieken over te houden. Om de baseline uit te rekenen zijn er verschillende methodes, ‘TopHat’ is het gekomen algoritme, omdat deze wat aggresiever ruis verwijderde wat in dit geval leidde tot minder ruis.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="vrije-opdracht-proteomics.html#cb42-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">calibrateIntensity</span>(bs_cor_data_101mzML,<span class="at">method =</span> <span class="st">&quot;TIC&quot;</span>))</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/normalization-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="vrije-opdracht-proteomics.html#cb43-1" tabindex="-1"></a>norm_data_101mzML<span class="ot">&lt;-</span><span class="fu">calibrateIntensity</span>(bs_cor_data_101mzML,<span class="at">method =</span> <span class="st">&quot;TIC&quot;</span>)</span></code></pre></div>
+<p>De pieken worden standaard i.v.m. batch control genormaliseerd, hoewel dat hier eigenlijk niet nodig is.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="vrije-opdracht-proteomics.html#cb44-1" tabindex="-1"></a><span class="co"># defaults, geen vol begrip van instellingen hiervan</span></span>
+<span id="cb44-2"><a href="vrije-opdracht-proteomics.html#cb44-2" tabindex="-1"></a>warp_data_101mzML<span class="ot">&lt;-</span><span class="fu">alignSpectra</span>(<span class="at">spectra =</span> <span class="fu">list</span>(norm_data_101mzML))</span>
+<span id="cb44-3"><a href="vrije-opdracht-proteomics.html#cb44-3" tabindex="-1"></a><span class="fu">plot</span>(warp_data_101mzML[[<span class="dv">1</span>]])</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/warping-1.png" alt="" width="672" />
+Deze stap is bedoeld om samples te vergelijking tussen massa spectra. In dit geval wordt niet vergeleken en is dit ook niet nodig.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="vrije-opdracht-proteomics.html#cb45-1" tabindex="-1"></a>noise<span class="ot">&lt;-</span><span class="fu">estimateNoise</span>(warp_data_101mzML[[<span class="dv">1</span>]])</span>
+<span id="cb45-2"><a href="vrije-opdracht-proteomics.html#cb45-2" tabindex="-1"></a><span class="fu">plot</span>(warp_data_101mzML[[<span class="dv">1</span>]],<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">6000</span>,<span class="dv">10000</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.003</span>))</span>
+<span id="cb45-3"><a href="vrije-opdracht-proteomics.html#cb45-3" tabindex="-1"></a><span class="fu">lines</span>(noise, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/peak%20detection-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="vrije-opdracht-proteomics.html#cb46-1" tabindex="-1"></a>peaks1 <span class="ot">&lt;-</span> <span class="fu">detectPeaks</span>(warp_data_101mzML, <span class="at">method=</span><span class="st">&quot;MAD&quot;</span>,<span class="at">halfWindowSize=</span><span class="dv">20</span>, <span class="at">SNR=</span><span class="dv">3</span>)</span>
+<span id="cb46-2"><a href="vrije-opdracht-proteomics.html#cb46-2" tabindex="-1"></a><span class="fu">plot</span>(warp_data_101mzML[[<span class="dv">1</span>]], <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">5000</span>, <span class="dv">6000</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.003</span>))</span>
+<span id="cb46-3"><a href="vrije-opdracht-proteomics.html#cb46-3" tabindex="-1"></a><span class="fu">points</span>(peaks[[<span class="dv">1</span>]], <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">pch=</span><span class="dv">4</span>)</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/peak%20detection-2.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="vrije-opdracht-proteomics.html#cb47-1" tabindex="-1"></a>peaks2 <span class="ot">&lt;-</span> <span class="fu">detectPeaks</span>(warp_data_101mzML, <span class="at">method=</span><span class="st">&quot;MAD&quot;</span>,<span class="at">halfWindowSize=</span><span class="dv">20</span>, <span class="at">SNR=</span><span class="dv">3</span>)</span>
+<span id="cb47-2"><a href="vrije-opdracht-proteomics.html#cb47-2" tabindex="-1"></a><span class="fu">plot</span>(warp_data_101mzML[[<span class="dv">1</span>]], <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">8000</span>, <span class="dv">10000</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.003</span>))</span>
+<span id="cb47-3"><a href="vrije-opdracht-proteomics.html#cb47-3" tabindex="-1"></a><span class="fu">points</span>(peaks[[<span class="dv">1</span>]], <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">pch=</span><span class="dv">4</span>)</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/peak%20detection-3.png" alt="" width="672" />
+Om de pieken te detecteren wordt ‘detectPeaks’ gebruikt. de Signal-to-Noise ratio is hier erg belangrijk om pieken te determineren, deze ratio is in dit geval 3.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="vrije-opdracht-proteomics.html#cb48-1" tabindex="-1"></a>bin_data_101mzML<span class="ot">&lt;-</span><span class="fu">binPeaks</span>(peaks,<span class="at">tolerance =</span> <span class="fl">0.002</span>)</span>
+<span id="cb48-2"><a href="vrije-opdracht-proteomics.html#cb48-2" tabindex="-1"></a><span class="fu">plot</span>(peaks[[<span class="dv">1</span>]])</span></code></pre></div>
+<p><img src="Portfolio_files/figure-html/peak%20binning%20and%20Feature%20matrix-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="vrije-opdracht-proteomics.html#cb49-1" tabindex="-1"></a><span class="fu">plot</span>(bin_data_101mzML[[<span class="dv">1</span>]])</span>
+<span id="cb49-2"><a href="vrije-opdracht-proteomics.html#cb49-2" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="vrije-opdracht-proteomics.html#cb49-3" tabindex="-1"></a><span class="co"># geen verschil gevonden, mogelijk te weinig identieke waardes of niet zichtbaar in plotting</span></span>
+<span id="cb49-4"><a href="vrije-opdracht-proteomics.html#cb49-4" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="vrije-opdracht-proteomics.html#cb49-5" tabindex="-1"></a>fin_data_101_mzML<span class="ot">&lt;-</span><span class="fu">filterPeaks</span>(bin_data_101mzML,<span class="at">minFrequency =</span> <span class="fl">0.3</span>)</span>
+<span id="cb49-6"><a href="vrije-opdracht-proteomics.html#cb49-6" tabindex="-1"></a><span class="fu">plot</span>(fin_data_101_mzML[[<span class="dv">1</span>]])</span></code></pre></div>
+<p>Het eindproduct met peakbinnen en feature matrix worden gebruikt om erge vergelijkbare datapunten samen te voegen en valspositieven te verwijderen. Dit product kan later gebruikt worden voor downstream analyse om de exacte compositie van de sample te achterhalen.</p>
+<p>In combinatie met verdere downstream analyse om eiwit compositie te achterhalen is dit een goede dataverwerkingstool voor MALDI-TOF data.</p>
+
 </div>
 </div>
             </section>
